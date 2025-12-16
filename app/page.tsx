@@ -5,7 +5,7 @@ export default function Home() {
     "Hi! I’d like a quote.\n" +
     "Job: ____\n" +
     "Address (Tooele area): ____\n" +
-    "Best times for YOU to come by: ____\n" +
+    "Im available at: ____\n" +
     "Photos (optional): ____";
 
   // Works best on phones; domain users will tap to open SMS.
