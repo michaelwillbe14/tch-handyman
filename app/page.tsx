@@ -2,7 +2,7 @@ export default function Home() {
   const phone = "9285774808";
 
   const smsLink = `sms:${phone}?&body=${encodeURIComponent(
-    "Hi! I’d like a quote for (type of job): ____. My address is: ____. I will be available at:_____.
+    "Hi! I’d like a quote for (type of job): ____. My address is: ____. I will be available at:____\n"
   )}`;
 
   // Replace this later with your real Google Review link
