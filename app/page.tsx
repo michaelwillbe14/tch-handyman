@@ -1,24 +1,61 @@
 export default function Home() {
   const phone = "9285774808";
 
-  const smsLink = `sms:${phone}?&body=${encodeURIComponent(
-    "Hi! I’d like a quote for (type of job): ____. My address is: ____. I will be available at:____\n"
-  )}`;
+  const smsBody =
+    "Hi! I’d like a quote.\n" +
+    "Job: ____\n" +
+    "Address (Tooele area): ____\n" +
+    "Best times for YOU to come by: ____\n" +
+    "Photos (optional): ____";
 
-  // Replace this later with your real Google Review link
+  // Works best on phones; domain users will tap to open SMS.
+  const smsLink = `sms:${phone}?body=${encodeURIComponent(smsBody)}`;
+
+  // Keep this as a placeholder until you have a real Google review link.
+  // When ready, replace "#" with your Google “Leave a review” link.
   const reviewLink = "#";
 
-  const services: string[] = [
-    "Interior & exterior painting",
-    "Drywall repair & texture",
-    "Minor plumbing repairs",
-    "Minor electrical (fixtures, switches, fans)",
-    "Trim, doors & hardware installs",
-    "Caulking & sealing",
-    "Small carpentry repairs",
-    "TV mounting & shelves",
-    "Fence & gate fixes",
-    "Punch-list / rental turn-overs",
+  const services: { title: string; desc: string }[] = [
+    {
+      title: "Interior painting",
+      desc: "Walls, ceilings, trim, doors, and touch-ups. Clean cut lines, proper prep, and a tidy finish.",
+    },
+    {
+      title: "Exterior painting",
+      desc: "Siding, trim, fascia, doors, and repairs before paint. Scrape/prime where needed for a longer-lasting coat.",
+    },
+    {
+      title: "Drywall repair & texture",
+      desc: "Holes, cracks, patches, and water-damage fixes. Texture match (as close as possible) and ready-to-paint results.",
+    },
+    {
+      title: "Minor plumbing repairs",
+      desc: "Faucets, shutoff valves, toilet fixes, drain traps, and small leaks. Quick repairs without the big plumbing bill.",
+    },
+    {
+      title: "Minor electrical",
+      desc: "Replace switches/outlets, light fixtures, ceiling fans, and troubleshooting simple issues (no major rewires).",
+    },
+    {
+      title: "Trim, doors & hardware",
+      desc: "Install/repair trim, hang doors, replace locks/handles, and fix sticking or sagging doors.",
+    },
+    {
+      title: "Caulking & sealing",
+      desc: "Tubs, showers, sinks, windows, and trim gaps. Cleaner look + helps prevent moisture and drafts.",
+    },
+    {
+      title: "Small carpentry repairs",
+      desc: "Rotted wood replacement, minor framing, baseboards, fence pickets, and general home fixes.",
+    },
+    {
+      title: "TV mounting & shelves",
+      desc: "Mount TVs safely into studs, install shelves/curtains/blinds, and keep everything level and secure.",
+    },
+    {
+      title: "Punch-list / rental turn-overs",
+      desc: "Knock out the small stuff fast: patch/paint, hardware, fixtures, caulk, and quick repairs before move-in.",
+    },
   ];
 
   return (
@@ -33,23 +70,19 @@ export default function Home() {
               className="h-10 w-10 rounded-full object-cover ring-1 ring-white/15"
             />
             <div className="leading-tight">
-              <div className="text-sm font-semibold tracking-wide">
-                TCH Handyman
-              </div>
+              <div className="text-sm font-semibold tracking-wide">TCH Handyman</div>
               <div className="text-xs text-white/70">
                 Tooele &amp; surrounding areas • Licensed &amp; insured
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <a
-              href={smsLink}
-              className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-white/90"
-            >
-              Text for a Quote
-            </a>
-          </div>
+          <a
+            href={smsLink}
+            className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-white/90"
+          >
+            Text for a Quote
+          </a>
         </div>
       </header>
 
@@ -67,9 +100,8 @@ export default function Home() {
             </h1>
 
             <p className="mt-4 text-base leading-relaxed text-white/75">
-              Serving Tooele and nearby communities. From painting and drywall to
-              minor plumbing and electrical, I handle the small jobs that make a
-              big difference.
+              Serving Tooele and nearby communities. Painting, drywall, minor plumbing and
+              electrical, and the “small jobs” that make a big difference.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -89,9 +121,9 @@ export default function Home() {
 
             <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {[
-                ["Fast response", "Text me your job + photos"],
-                ["Fair pricing", "Clear scope and expectations"],
-                ["Quality finish", "Clean edges & solid repairs"],
+                ["Fast response", "Text the job + photos"],
+                ["Clear pricing", "Scope first, no surprises"],
+                ["Clean finish", "Respectful work & cleanup"],
               ].map(([title, sub]) => (
                 <div
                   key={title}
@@ -112,7 +144,7 @@ export default function Home() {
                 <li>• What needs done (painting, drywall, etc.)</li>
                 <li>• Address / area in Tooele County</li>
                 <li>• Photos (if possible)</li>
-                <li>• Desired timeline</li>
+                <li>• Preferred times for me to come by</li>
               </ul>
 
               <a
@@ -123,7 +155,7 @@ export default function Home() {
               </a>
 
               <p className="mt-3 text-xs text-white/60">
-                Tip: Include photos for the fastest estimate.
+                Tip: Photos help me estimate faster.
               </p>
             </div>
 
@@ -149,19 +181,18 @@ export default function Home() {
       <section id="services" className="mx-auto max-w-6xl px-5 pb-16">
         <h2 className="text-2xl font-bold tracking-tight">Services</h2>
         <p className="mt-2 text-sm text-white/70">
-          Common handyman work I take on — ask if you don’t see it listed.
+          Here’s the type of work I do most often. If you don’t see it listed, text me — I’ll tell you if it’s a good fit.
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (
             <div
-              key={s}
+              key={s.title}
               className="rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/10"
             >
-              <div className="text-sm font-semibold">{s}</div>
-              <div className="mt-1 text-xs text-white/65">
-                Quality materials, clean finish, and respectful work in your
-                home.
+              <div className="text-sm font-semibold">{s.title}</div>
+              <div className="mt-2 text-xs leading-relaxed text-white/70">
+                {s.desc}
               </div>
             </div>
           ))}
@@ -172,12 +203,9 @@ export default function Home() {
       <section id="trust" className="mx-auto max-w-6xl px-5 pb-16">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-2xl font-bold tracking-tight">
-              Trusted local handyman
-            </h2>
+            <h2 className="text-2xl font-bold tracking-tight">Trust &amp; peace of mind</h2>
             <p className="mt-2 text-sm text-white/70">
-              Clear communication, clean work, and a professional finish — every
-              time.
+              Clear communication, clean work, and a professional finish — every time.
             </p>
           </div>
 
@@ -200,14 +228,14 @@ export default function Home() {
         <div className="mt-6 grid gap-4 lg:grid-cols-3">
           {/* Badges */}
           <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <div className="text-sm font-semibold">Peace of mind</div>
+            <div className="text-sm font-semibold">What you can expect</div>
             <div className="mt-3 flex flex-wrap gap-2">
               {[
                 "Licensed & insured",
                 "Local to Tooele County",
                 "Respectful in your home",
                 "Clean-up included",
-                "Upfront pricing",
+                "Clear scope first",
               ].map((b) => (
                 <span
                   key={b}
@@ -224,11 +252,11 @@ export default function Home() {
 
           {/* Process */}
           <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <div className="text-sm font-semibold">What to expect</div>
+            <div className="text-sm font-semibold">Simple process</div>
             <ol className="mt-3 space-y-2 text-sm text-white/75">
               <li>1) Text me the job + photos</li>
-              <li>2) I confirm the scope &amp; price range</li>
-              <li>3) Schedule a time that works for you</li>
+              <li>2) I confirm scope &amp; price range</li>
+              <li>3) We schedule a time that works</li>
               <li>4) Job done — clean finish &amp; cleanup</li>
             </ol>
             <p className="mt-4 text-xs text-white/60">
@@ -236,26 +264,28 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Reviews */}
+          {/* Sample Reviews (clearly labeled) */}
           <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <div className="text-sm font-semibold">Customer reviews</div>
+            <div className="text-sm font-semibold">
+              Sample reviews (placeholders — replace with real ones)
+            </div>
 
             <div className="mt-3 space-y-3">
               {[
                 {
                   stars: "★★★★★",
-                  text: "Showed up on time, communicated clearly, and the work came out great. Would hire again.",
-                  name: "Local homeowner",
+                  text: "Quick response, solid work, and everything was cleaned up after. Would hire again.",
+                  name: "Sample review",
                 },
                 {
                   stars: "★★★★★",
-                  text: "Clean drywall repair and paint match. Left the area spotless.",
-                  name: "Tooele customer",
+                  text: "Drywall patch blended in great and the paint matched well. Professional and respectful.",
+                  name: "Sample review",
                 },
                 {
                   stars: "★★★★★",
-                  text: "Quick install and solid work. Fair pricing and no surprises.",
-                  name: "Stansbury Park customer",
+                  text: "Fair pricing and clear communication. Got the small repairs done fast.",
+                  name: "Sample review",
                 },
               ].map((r, idx) => (
                 <div
@@ -270,7 +300,7 @@ export default function Home() {
             </div>
 
             <p className="mt-4 text-xs text-white/60">
-              (We can replace these with your real reviews anytime.)
+              These are sample placeholders. Swap them with real customer reviews when you have them.
             </p>
           </div>
         </div>
@@ -283,6 +313,7 @@ export default function Home() {
             <div className="text-sm text-white/70">
               © {new Date().getFullYear()} TCH Handyman • Tooele, UT
             </div>
+
             <div className="flex flex-col gap-2 sm:flex-row">
               <a
                 href={reviewLink}
