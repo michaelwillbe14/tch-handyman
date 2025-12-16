@@ -311,7 +311,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-5 py-10">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="text-sm text-white/70">
-              © {new Date().getFullYear()} TCH Handyman • Tooele, UT
+              © {new Date().getFullYear()} TC Handyman • Tooele, UT
             </div>
 
             <div className="flex flex-col gap-2 sm:flex-row">
