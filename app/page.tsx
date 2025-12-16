@@ -151,7 +151,7 @@ export default function Home() {
                 href={smsLink}
                 className="mt-5 block rounded-2xl bg-white px-5 py-3 text-center text-sm font-semibold text-zinc-950 hover:bg-white/90"
               >
-                Text {phone} for a Quote
+                Text Michael for a Free Quote
               </a>
 
               <p className="mt-3 text-xs text-white/60">
