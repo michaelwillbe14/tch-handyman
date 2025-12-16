@@ -29,7 +29,7 @@ export default function Home() {
             </div>
             <div className="leading-tight">
               <img
-  src="/images/logo.png"
+  
   alt="TCH Handyman logo"
   className="h-10 w-10 rounded-full object-cover ring-1 ring-white/15"
 />
