@@ -70,7 +70,7 @@ export default function Home() {
               className="h-10 w-10 rounded-full object-cover ring-1 ring-white/15"
             />
             <div className="leading-tight">
-              <div className="text-sm font-semibold tracking-wide">TCH Handyman</div>
+              <div className="text-sm font-semibold tracking-wide">TC Handyman</div>
               <div className="text-xs text-white/70">
                 Tooele &amp; surrounding areas • Licensed &amp; insured
               </div>
