@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "TCH Handyman",
+  title: "TC Handyman",
   description: "Professional handyman services in Tooele and surrounding areas",
 };
 
