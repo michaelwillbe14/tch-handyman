@@ -2,7 +2,11 @@ import "./globals.css";
 
 export const metadata = {
   title: "TC Handyman",
-  description: "Professional handyman services in Tooele and surrounding areas",
+  description: "Handyman services in Tooele and surrounding areas. Licensed & insured.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
