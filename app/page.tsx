@@ -66,7 +66,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <img
               src="/images/logo.png"
-              alt="TCH Handyman logo"
+              alt="TC Handyman logo"
               className="h-10 w-10 rounded-full object-cover ring-1 ring-white/15"
             />
             <div className="leading-tight">
