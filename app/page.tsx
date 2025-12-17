@@ -2,19 +2,19 @@ export default function Home() {
   const services = [
     "Interior & Exterior Painting",
     "Drywall Repair & Installation",
+    "Flooring Installation (Vinyl Plank)",
     "Minor Plumbing",
     "Minor Electrical",
     "Fixture & Appliance Installation",
     "General Home Repairs",
-    "Flooring Installation (Vinyl Plank)",
   ];
 
   return (
     <div className="min-h-screen bg-white text-slate-800">
       {/* HEADER */}
       <header className="bg-slate-900 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-2xl font-bold tracking-wide">TC Handyman</h1>
+        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <h1 className="text-2xl font-bold">TC Handyman</h1>
 
           <a
             href="sms:9285774808?body=Hi%20Michael%2C%20I%20would%20like%20a%20free%20quote."
@@ -39,7 +39,7 @@ export default function Home() {
 
           <a
             href="sms:9285774808?body=Hi%20Michael%2C%20I%20would%20like%20a%20free%20quote."
-            className="inline-block bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-2xl text-lg font-semibold transition"
+            className="inline-block bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-2xl font-semibold transition"
           >
             Get a Free Quote
           </a>
@@ -48,7 +48,7 @@ export default function Home() {
 
       {/* SERVICES */}
       <section className="max-w-6xl mx-auto px-6 py-20">
-        <h3 className="text-3xl font-bold text-slate-900 text-center mb-12">
+        <h3 className="text-3xl font-bold text-center mb-12">
           Services Offered
         </h3>
 
@@ -56,88 +56,87 @@ export default function Home() {
           {services.map((service) => (
             <div
               key={service}
-              className="bg-white border border-blue-100 rounded-2xl shadow-sm p-6 text-center hover:shadow-md transition"
+              className="bg-white border border-blue-100 rounded-2xl p-6 text-center shadow-sm"
             >
-              <h4 className="text-lg font-semibold text-slate-800">{service}</h4>
+              <h4 className="font-semibold">{service}</h4>
             </div>
           ))}
         </div>
       </section>
 
-      {/* BEFORE & AFTER – FLOORING */}
+      {/* FLOORING BEFORE & AFTER */}
       <section className="bg-blue-50">
         <div className="max-w-6xl mx-auto px-6 py-20">
-          <h3 className="text-3xl font-bold text-slate-900 text-center mb-4">
+          <h3 className="text-3xl font-bold text-center mb-4">
             Flooring Installation – Before & After
           </h3>
 
-          <p className="text-slate-600 text-center max-w-2xl mx-auto mb-12">
-            Real results from a flooring job. Clean, durable vinyl plank flooring
-            for a fresh new look.
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <img
+              src="/before-after/flooring-before-1.jpeg"
+              className="h-80 w-full object-cover rounded-2xl"
+              alt="Flooring before"
+            />
+            <img
+              src="/before-after/flooring-after-1.jpeg"
+              className="h-80 w-full object-cover rounded-2xl"
+              alt="Flooring after"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* PAINTING BEFORE & AFTER */}
+      <section>
+        <div className="max-w-6xl mx-auto px-6 py-20">
+          <h3 className="text-3xl font-bold text-center mb-4">
+            Interior Painting – Before & After
+          </h3>
+
+          <p className="text-center text-slate-600 mb-12">
+            Full room repaint with clean lines, smooth finish, and modern color.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* BEFORE */}
-            <div className="bg-white border border-blue-100 rounded-2xl overflow-hidden shadow-sm">
-              <div className="relative">
-                <img
-                  src="/before-after/flooring-before-1.jpeg"
-                  alt="Flooring before installation"
-                  className="w-full h-80 object-cover"
-                />
-                <span className="absolute top-4 left-4 bg-slate-900 text-white text-sm font-semibold px-4 py-1 rounded-full">
-                  Before
-                </span>
-              </div>
+            <div className="relative">
+              <img
+                src="/before-after/painting-before-1.jpeg"
+                className="h-80 w-full object-cover rounded-2xl"
+                alt="Painting before"
+              />
+              <span className="absolute top-4 left-4 bg-slate-900 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                Before
+              </span>
             </div>
 
             {/* AFTER */}
-            <div className="bg-white border border-blue-100 rounded-2xl overflow-hidden shadow-sm">
-              <div className="relative">
-                <img
-                  src="/before-after/flooring-after-1.jpeg"
-                  alt="Flooring after installation"
-                  className="w-full h-80 object-cover"
-                />
-                <span className="absolute top-4 left-4 bg-blue-600 text-white text-sm font-semibold px-4 py-1 rounded-full">
-                  After
-                </span>
-              </div>
+            <div className="relative">
+              <img
+                src="/before-after/painting-after-1.jpeg"
+                className="h-80 w-full object-cover rounded-2xl"
+                alt="Painting after"
+              />
+              <span className="absolute top-4 left-4 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                After
+              </span>
             </div>
           </div>
 
           <div className="text-center mt-12">
             <a
-              href="sms:9285774808?body=Hi%20Michael%2C%20I%20saw%20your%20flooring%20before%20and%20after%20photos%20and%20would%20like%20a%20free%20quote."
+              href="sms:9285774808?body=Hi%20Michael%2C%20I%20saw%20your%20painting%20before%20and%20after%20photos%20and%20would%20like%20a%20free%20quote."
               className="inline-block bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-2xl font-semibold transition"
             >
-              Text for a Flooring Quote
+              Text for a Painting Quote
             </a>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-slate-900 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-16 text-center">
-          <h3 className="text-3xl font-bold mb-4">Need Help With a Project?</h3>
-
-          <p className="text-blue-200 mb-8">
-            Text Michael today for a fast and free quote.
-          </p>
-
-          <a
-            href="sms:9285774808?body=Hi%20Michael%2C%20I%20would%20like%20a%20free%20quote."
-            className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-2xl font-semibold transition"
-          >
-            Text Now
-          </a>
-        </div>
-      </section>
-
       {/* FOOTER */}
       <footer className="bg-blue-50">
-        <div className="max-w-6xl mx-auto px-6 py-6 text-center text-slate-600">
+        <div className="text-center py-6 text-slate-600">
           © {new Date().getFullYear()} TC Handyman · Tooele, UT
         </div>
       </footer>
