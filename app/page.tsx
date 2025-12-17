@@ -86,7 +86,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PAINTING BEFORE & AFTER */}
+      {/* PAINTING BEFORE & AFTER (UPDATED) */}
       <section>
         <div className="max-w-6xl mx-auto px-6 py-20">
           <h3 className="text-3xl font-bold text-center mb-4">
@@ -94,7 +94,7 @@ export default function Home() {
           </h3>
 
           <p className="text-center text-slate-600 mb-12">
-            Full room repaint with clean lines, smooth finish, and modern color.
+            Full room repaint with clean lines, smooth finish, and a bold modern color.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -113,7 +113,7 @@ export default function Home() {
             {/* AFTER */}
             <div className="relative">
               <img
-                src="/before-after/painting-after-1.jpeg"
+                src="/before-after/painting-after-2.jpeg"
                 className="h-80 w-full object-cover rounded-2xl"
                 alt="Painting after"
               />
