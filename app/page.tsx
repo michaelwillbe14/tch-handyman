@@ -1,3 +1,98 @@
+"use client";
+
+import { useRef } from "react";
+
+function Slider({ title, subtitle, images }) {
+  const scrollerRef = useRef(null);
+
+  const scrollByCard = (dir) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    // Scroll about one card width
+    const card = el.querySelector("[data-card='1']");
+    const amount = card ? card.getBoundingClientRect().width + 16 : 360;
+    el.scrollBy({ left: dir * amount, behavior: "smooth" });
+  };
+
+  return (
+    <section className="bg-blue-50">
+      <div className="max-w-6xl mx-auto px-6 py-20">
+        <div className="flex flex-col gap-3 text-center mb-10">
+          <h3 className="text-3xl font-bold text-slate-900">{title}</h3>
+          {subtitle ? <p className="text-slate-600">{subtitle}</p> : null}
+          <p className="text-slate-500 text-sm">
+            Swipe left/right on your phone, or use the arrows.
+          </p>
+        </div>
+
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <button
+            onClick={() => scrollByCard(-1)}
+            className="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-xl font-semibold transition"
+            type="button"
+          >
+            ←
+          </button>
+
+          <button
+            onClick={() => scrollByCard(1)}
+            className="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-xl font-semibold transition"
+            type="button"
+          >
+            →
+          </button>
+        </div>
+
+        <div
+          ref={scrollerRef}
+          className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2"
+        >
+          {images.map((img, idx) => (
+            <a
+              key={img.src}
+              href={img.src}
+              target="_blank"
+              rel="noreferrer"
+              className="min-w-[85%] sm:min-w-[420px] md:min-w-[520px] snap-start"
+              data-card={idx === 0 ? "1" : undefined}
+              title="Click to open full size"
+            >
+              <div className="bg-white border border-blue-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+                <div className="relative">
+                  <img
+                    src={img.src}
+                    alt={img.alt || img.label || "Project photo"}
+                    className="w-full h-80 object-cover"
+                    loading="lazy"
+                  />
+                  {img.label ? (
+                    <span
+                      className={`absolute top-4 left-4 px-4 py-1 rounded-full text-sm font-semibold text-white ${
+                        img.label.toLowerCase().includes("before")
+                          ? "bg-slate-900"
+                          : "bg-blue-600"
+                      }`}
+                    >
+                      {img.label}
+                    </span>
+                  ) : null}
+                </div>
+
+                {img.caption ? (
+                  <div className="p-5">
+                    <p className="text-slate-700">{img.caption}</p>
+                  </div>
+                ) : null}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   const services = [
     "Interior & Exterior Painting",
@@ -7,6 +102,52 @@ export default function Home() {
     "Minor Electrical",
     "Fixture & Appliance Installation",
     "General Home Repairs",
+  ];
+
+  const flooringImages = [
+    {
+      src: "/before-after/flooring-before-1.jpeg",
+      label: "Before 1",
+      caption: "Old concrete surface before install.",
+    },
+    {
+      src: "/before-after/flooring-before-2.jpeg",
+      label: "Before 2",
+      caption: "Another angle of the same area.",
+    },
+    {
+      src: "/before-after/flooring-after-1.jpeg",
+      label: "After 1",
+      caption: "New vinyl plank flooring installed.",
+    },
+    {
+      src: "/before-after/flooring-after-2.jpeg",
+      label: "After 2",
+      caption: "Finished space — clean and modern.",
+    },
+  ];
+
+  const paintingImages = [
+    {
+      src: "/before-after/painting-before-1.jpeg",
+      label: "Before 1",
+      caption: "Prep & masking before paint.",
+    },
+    {
+      src: "/before-after/painting-before-2.jpeg",
+      label: "Before 2",
+      caption: "Room before the new color.",
+    },
+    {
+      src: "/before-after/painting-after-1.jpeg",
+      label: "After 1",
+      caption: "Finished paint — crisp lines and smooth finish.",
+    },
+    {
+      src: "/before-after/painting-after-2.jpeg",
+      label: "After 2",
+      caption: "Second angle of the finished room.",
+    },
   ];
 
   return (
@@ -64,73 +205,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FLOORING BEFORE & AFTER */}
-      <section className="bg-blue-50">
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <h3 className="text-3xl font-bold text-center mb-4">
-            Flooring Installation – Before & After
-          </h3>
+      {/* FLOORING SLIDER */}
+      <Slider
+        title="Flooring Installation"
+        subtitle="Swipe through before & after photos."
+        images={flooringImages}
+      />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <img
-              src="/before-after/flooring-before-1.jpeg"
-              className="h-80 w-full object-cover rounded-2xl"
-              alt="Flooring before"
-            />
-            <img
-              src="/before-after/flooring-after-1.jpeg"
-              className="h-80 w-full object-cover rounded-2xl"
-              alt="Flooring after"
-            />
-          </div>
-        </div>
-      </section>
+      {/* PAINTING SLIDER */}
+      <Slider
+        title="Interior Painting"
+        subtitle="Swipe through before & after photos."
+        images={paintingImages}
+      />
 
-      {/* PAINTING BEFORE & AFTER (UPDATED) */}
-      <section>
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <h3 className="text-3xl font-bold text-center mb-4">
-            Interior Painting – Before & After
-          </h3>
+      {/* CTA */}
+      <section className="bg-slate-900 text-white">
+        <div className="max-w-6xl mx-auto px-6 py-16 text-center">
+          <h3 className="text-3xl font-bold mb-4">Need Help With a Project?</h3>
 
-          <p className="text-center text-slate-600 mb-12">
-            Full room repaint with clean lines, smooth finish, and a bold modern color.
+          <p className="text-blue-200 mb-8">
+            Text Michael today for a fast and free quote.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* BEFORE */}
-            <div className="relative">
-              <img
-                src="/before-after/painting-before-1.jpeg"
-                className="h-80 w-full object-cover rounded-2xl"
-                alt="Painting before"
-              />
-              <span className="absolute top-4 left-4 bg-slate-900 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                Before
-              </span>
-            </div>
-
-            {/* AFTER */}
-            <div className="relative">
-              <img
-                src="/before-after/painting-after-2.jpeg"
-                className="h-80 w-full object-cover rounded-2xl"
-                alt="Painting after"
-              />
-              <span className="absolute top-4 left-4 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                After
-              </span>
-            </div>
-          </div>
-
-          <div className="text-center mt-12">
-            <a
-              href="sms:9285774808?body=Hi%20Michael%2C%20I%20saw%20your%20painting%20before%20and%20after%20photos%20and%20would%20like%20a%20free%20quote."
-              className="inline-block bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-2xl font-semibold transition"
-            >
-              Text for a Painting Quote
-            </a>
-          </div>
+          <a
+            href="sms:9285774808?body=Hi%20Michael%2C%20I%20would%20like%20a%20free%20quote."
+            className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-2xl font-semibold transition"
+          >
+            Text Now
+          </a>
         </div>
       </section>
 
