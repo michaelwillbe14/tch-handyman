@@ -81,7 +81,7 @@ export default function Home() {
             <div className="bg-white border border-blue-100 rounded-2xl overflow-hidden shadow-sm">
               <div className="relative">
                 <img
-                  src="/before-after/flooring-before-1.jpg"
+                  src="/before-after/flooring-before-1.jpeg"
                   alt="Flooring before installation"
                   className="w-full h-80 object-cover"
                 />
@@ -95,7 +95,7 @@ export default function Home() {
             <div className="bg-white border border-blue-100 rounded-2xl overflow-hidden shadow-sm">
               <div className="relative">
                 <img
-                  src="/before-after/flooring-after-1.jpg"
+                  src="/before-after/flooring-after-1.jpeg"
                   alt="Flooring after installation"
                   className="w-full h-80 object-cover"
                 />
