@@ -75,7 +75,7 @@ export default function Home() {
       <section style={styles.section}>
         <h2 style={styles.sectionTitle}>About Me</h2>
         <p style={styles.text}>
-          I’m a handyman originally from <strong>Kingman, Arizona</strong>. I’m
+          My name is Michael Willoughby and im originally from <strong>Kingman, Arizona</strong>. I’m
           <strong> 21 years old</strong> with <strong>2 years of experience</strong>{" "}
           in painting, flooring, drywall, and general home repairs.
         </p>
