@@ -1,440 +1,416 @@
+// app/page.jsx
 "use client";
-
-import { useState } from "react";
-import Image from "next/image";
-
-function BeforeAfterCompare({ title, beforeSrc, afterSrc }) {
-  const [pos, setPos] = useState(50);
-
-  return (
-    <div style={ui.card}>
-      <div style={ui.cardTop}>
-        <div style={ui.cardTitle}>{title}</div>
-        <div style={ui.cardHint}>Drag to compare</div>
-      </div>
-
-      <div style={ui.compareFrame}>
-        {/* BEFORE */}
-        <Image
-          src={beforeSrc}
-          alt={`${title} - Before`}
-          fill
-          sizes="(max-width: 900px) 100vw, 900px"
-          style={{ objectFit: "cover" }}
-        />
-
-        {/* AFTER (clipped) */}
-        <div
-          style={{
-            ...ui.afterClip,
-            clipPath: `inset(0 ${100 - pos}% 0 0)`,
-          }}
-        >
-          <Image
-            src={afterSrc}
-            alt={`${title} - After`}
-            fill
-            sizes="(max-width: 900px) 100vw, 900px"
-            style={{ objectFit: "cover" }}
-          />
-        </div>
-
-        {/* Divider */}
-        <div style={{ ...ui.divider, left: `${pos}%` }} />
-        <div style={{ ...ui.knob, left: `${pos}%` }}>↔</div>
-
-        {/* Labels */}
-        <div style={{ ...ui.badge, left: 12 }}>Before</div>
-        <div style={{ ...ui.badge, right: 12 }}>After</div>
-      </div>
-
-      <input
-        type="range"
-        min={0}
-        max={100}
-        value={pos}
-        onChange={(e) => setPos(Number(e.target.value))}
-        style={ui.range}
-        aria-label="Before/After slider"
-      />
-    </div>
-  );
-}
-
-export default function Home() {
-  const smsLink =
-    "sms:19285774808?&body=Hi!%20My%20name%20is%20_____.%20I%20need%20help%20with%20_____.%20My%20address%20is%20_____.%20(Pictures%20attached%20if%20needed)";
-
-  // ✅ Pair the images correctly (Before + After are tied together)
-  const paintingPairs = [
-    {
-      title: "Painting Project 1",
-      before: "/painting-before-1.jpeg",
-      after: "/painting-after-1.jpeg",
-    },
-    {
-      title: "Painting Project 2",
-      before: "/painting-before-2.jpeg",
-      after: "/painting-after-2.jpeg",
-    },
-  ];
-
-  const flooringPairs = [
-    {
-      title: "Flooring Project 1",
-      before: "/flooring-before-1.jpeg",
-      after: "/flooring-after-1.jpeg",
-    },
-    {
-      title: "Flooring Project 2",
-      before: "/flooring-before-2.jpeg",
-      after: "/flooring-after-2.jpeg",
-    },
-  ];
-
-  const [category, setCategory] = useState("painting"); // "painting" | "flooring"
-  const [pairIndex, setPairIndex] = useState(0);
-
-  const pairs = category === "painting" ? paintingPairs : flooringPairs;
-  const current = pairs[pairIndex];
-
-  return (
-    <main style={styles.page}>
-      {/* Header */}
-      <header style={styles.header}>
-        <div style={styles.headerInner}>
-          <div style={styles.brand}>
-            <Image src="/logo.png" alt="Logo" width={56} height={56} />
-            <div>
-              <div style={styles.brandTitle}>Tooele Handyman Services</div>
-              <div style={styles.brandSub}>Local • Licensed • Insured</div>
-            </div>
-          </div>
-
-          <a href={smsLink} style={styles.ctaBtn}>
-            Text for Free Quote
-          </a>
-        </div>
-      </header>
-
-      {/* Hero */}
-      <section style={styles.hero}>
-        <div style={styles.heroInner}>
-          <h1 style={styles.heroTitle}>Trusted Handyman Services in Tooele County</h1>
-          <p style={styles.heroText}>
-            Interior & exterior painting, flooring, drywall, minor plumbing, minor electrical,
-            and dependable home repairs.
-          </p>
-
-          <div style={styles.heroButtons}>
-            <a href={smsLink} style={styles.primaryBtn}>Get a Free Quote by Text</a>
-            <a href="tel:9285774808" style={styles.secondaryBtn}>Call (928) 577-4808</a>
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section style={styles.section}>
-        <div style={styles.sectionInner}>
-          <h2 style={styles.sectionTitle}>About Me</h2>
-          <p style={styles.p}>
-            My name is Michael Willoughby and im originally from <b>Kingman, Arizona</b>. I’m <b>21 years old</b> with{" "}
-            <b>2 years of hands-on experience</b> in painting, flooring, drywall, and general home repairs.
-          </p>
-          <p style={styles.p}>
-            Now living in <b>Tooele County</b>, I would love the opportunity to support your home’s needs
-            with reliable, honest work you can trust.
-          </p>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section style={{ ...styles.section, background: "#eff6ff" }}>
-        <div style={styles.sectionInner}>
-          <h2 style={styles.sectionTitle}>Services</h2>
-          <div style={styles.servicesGrid}>
-            {[
-              "Interior painting",
-              "Exterior painting",
-              "Flooring installation & repair",
-              "Drywall repair & patching",
-              "Minor plumbing repairs",
-              "Minor electrical work",
-              "Trim, doors & baseboards",
-              "Fixture & hardware replacement",
-              "General home maintenance",
-              "Punch-list & small projects",
-            ].map((s) => (
-              <div key={s} style={styles.serviceCard}>✓ {s}</div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* BEFORE/AFTER COMPARISON (REAL) */}
-      <section style={styles.section}>
-        <div style={styles.sectionInner}>
-          <h2 style={styles.sectionTitle}>Before & After</h2>
-          <p style={styles.p}>Choose a project, then drag the slider to compare.</p>
-
-          {/* Category buttons */}
-          <div style={styles.switchRow}>
-            <button
-              onClick={() => {
-                setCategory("painting");
-                setPairIndex(0);
-              }}
-              style={{
-                ...styles.switchBtn,
-                ...(category === "painting" ? styles.switchBtnActive : null),
-              }}
-            >
-              Painting
-            </button>
-            <button
-              onClick={() => {
-                setCategory("flooring");
-                setPairIndex(0);
-              }}
-              style={{
-                ...styles.switchBtn,
-                ...(category === "flooring" ? styles.switchBtnActive : null),
-              }}
-            >
-              Flooring
-            </button>
-          </div>
-
-          {/* Pair selector */}
-          <div style={styles.switchRow}>
-            {pairs.map((p, i) => (
-              <button
-                key={p.title}
-                onClick={() => setPairIndex(i)}
-                style={{
-                  ...styles.smallBtn,
-                  ...(i === pairIndex ? styles.smallBtnActive : null),
-                }}
-              >
-                {i + 1}
-              </button>
-            ))}
-          </div>
-
-          <BeforeAfterCompare
-            title={current.title}
-            beforeSrc={current.before}
-            afterSrc={current.after}
-          />
-
-          <div style={{ marginTop: 12, textAlign: "center" }}>
-            <a href={smsLink} style={styles.primaryBtn}>Text for a Free Quote</a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer style={styles.footer}>
-        <div style={styles.footerInner}>
-          <div style={{ fontWeight: 800 }}>Tooele Handyman Services</div>
-          <div style={{ marginTop: 6 }}>
-            <a href="tel:9285774808" style={styles.footerLink}>(928) 577-4808</a>
-          </div>
-          <div style={{ marginTop: 10, fontSize: 12 }}>
-            © {new Date().getFullYear()} • Local • Licensed • Insured
-          </div>
-        </div>
-      </footer>
-    </main>
-  );
-}
 
 const styles = {
   page: {
-    fontFamily: "Arial, sans-serif",
-    background: "linear-gradient(180deg, #eff6ff, #ffffff)",
-    color: "#0f172a",
+    minHeight: "100vh",
+    background: "linear-gradient(180deg, #0b1b3a 0%, #0f2b5a 40%, #ffffff 100%)",
+    color: "#0b1b3a",
+    fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
   },
-  header: {
-    position: "sticky",
-    top: 0,
-    background: "#ffffffcc",
-    backdropFilter: "blur(8px)",
-    borderBottom: "1px solid #dbeafe",
-    zIndex: 20,
-  },
-  headerInner: {
-    maxWidth: 1100,
+  container: {
+    width: "min(1100px, 92%)",
     margin: "0 auto",
-    padding: "14px 18px",
+    padding: "28px 0 60px",
+  },
+  nav: {
     display: "flex",
-    justifyContent: "space-between",
     alignItems: "center",
-    gap: 14,
-  },
-  brand: { display: "flex", gap: 12, alignItems: "center" },
-  brandTitle: { fontSize: 20, fontWeight: 900 },
-  brandSub: { fontSize: 13, color: "#2563eb", fontWeight: 700 },
-  ctaBtn: {
-    background: "#2563eb",
-    color: "#fff",
-    padding: "12px 16px",
-    borderRadius: 12,
-    textDecoration: "none",
-    fontWeight: 800,
-    whiteSpace: "nowrap",
-  },
-  hero: { padding: "48px 18px" },
-  heroInner: { maxWidth: 900, margin: "0 auto", textAlign: "center" },
-  heroTitle: { fontSize: 40, fontWeight: 950, margin: "0 0 10px" },
-  heroText: { fontSize: 18, color: "#334155", margin: 0, lineHeight: 1.6 },
-  heroButtons: {
-    marginTop: 18,
-    display: "flex",
+    justifyContent: "space-between",
     gap: 12,
-    justifyContent: "center",
-    flexWrap: "wrap",
-  },
-  primaryBtn: {
-    background: "#2563eb",
+    padding: "14px 18px",
+    borderRadius: 16,
+    background: "rgba(255,255,255,0.10)",
+    border: "1px solid rgba(255,255,255,0.18)",
     color: "#fff",
-    padding: "12px 16px",
-    borderRadius: 12,
-    fontWeight: 800,
-    textDecoration: "none",
-    display: "inline-block",
+    backdropFilter: "blur(8px)",
   },
-  secondaryBtn: {
-    background: "#fff",
-    border: "1px solid #bfdbfe",
-    color: "#1e40af",
-    padding: "12px 16px",
-    borderRadius: 12,
-    fontWeight: 800,
+  brand: { fontWeight: 800, letterSpacing: 0.3 },
+  navLinks: { display: "flex", gap: 14, flexWrap: "wrap" },
+  navLink: {
+    color: "rgba(255,255,255,0.92)",
     textDecoration: "none",
-    display: "inline-block",
+    fontSize: 14,
+    padding: "8px 10px",
+    borderRadius: 12,
   },
-  section: { padding: "36px 18px" },
-  sectionInner: { maxWidth: 1100, margin: "0 auto" },
-  sectionTitle: { fontSize: 28, fontWeight: 950, margin: "0 0 10px" },
-  p: { color: "#334155", lineHeight: 1.6, margin: "0 0 10px" },
-
-  servicesGrid: {
+  hero: {
+    marginTop: 18,
+    padding: "26px 18px",
+    borderRadius: 18,
+    background: "rgba(255,255,255,0.12)",
+    border: "1px solid rgba(255,255,255,0.22)",
+    color: "#fff",
+  },
+  heroGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gridTemplateColumns: "1.2fr 0.8fr",
+    gap: 18,
+    alignItems: "stretch",
+  },
+  heroTitle: { fontSize: 40, lineHeight: 1.05, margin: 0, fontWeight: 900 },
+  heroText: { margin: "10px 0 0", color: "rgba(255,255,255,0.92)", fontSize: 16 },
+  pillRow: { display: "flex", gap: 10, flexWrap: "wrap", marginTop: 14 },
+  pill: {
+    fontSize: 12,
+    padding: "8px 10px",
+    borderRadius: 999,
+    background: "rgba(255,255,255,0.14)",
+    border: "1px solid rgba(255,255,255,0.18)",
+  },
+  heroCard: {
+    borderRadius: 18,
+    background: "rgba(255,255,255,0.16)",
+    border: "1px solid rgba(255,255,255,0.22)",
+    padding: 16,
+    display: "grid",
+    gap: 12,
+    alignContent: "start",
+  },
+  buttonRow: { display: "flex", gap: 10, flexWrap: "wrap", marginTop: 14 },
+  primaryBtn: {
+    display: "inline-block",
+    padding: "12px 14px",
+    borderRadius: 14,
+    textDecoration: "none",
+    background: "#e8f2ff",
+    color: "#0b1b3a",
+    fontWeight: 800,
+    border: "1px solid rgba(255,255,255,0.35)",
+  },
+  ghostBtn: {
+    display: "inline-block",
+    padding: "12px 14px",
+    borderRadius: 14,
+    textDecoration: "none",
+    background: "rgba(255,255,255,0.12)",
+    color: "#fff",
+    fontWeight: 800,
+    border: "1px solid rgba(255,255,255,0.22)",
+  },
+
+  section: {
+    marginTop: 26,
+    padding: "18px",
+    borderRadius: 18,
+    background: "#ffffff",
+    border: "1px solid rgba(15,43,90,0.12)",
+    boxShadow: "0 10px 28px rgba(10, 30, 70, 0.08)",
+  },
+  sectionTitle: { margin: 0, fontSize: 22, fontWeight: 900, color: "#0b1b3a" },
+  sectionSub: { margin: "8px 0 0", color: "rgba(11,27,58,0.72)" },
+
+  cards: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
     gap: 12,
     marginTop: 14,
   },
-  serviceCard: {
-    background: "#fff",
-    border: "1px solid #dbeafe",
-    borderRadius: 12,
-    padding: "10px",
-    fontWeight: 600,
-  },
-
-  switchRow: {
-    display: "flex",
-    gap: 10,
-    flexWrap: "wrap",
-    marginTop: 12,
-    marginBottom: 10,
-  },
-  switchBtn: {
-    border: "1px solid #bfdbfe",
-    background: "#fff",
-    color: "#1e40af",
-    padding: "10px 12px",
-    borderRadius: 12,
-    fontWeight: 900,
-    cursor: "pointer",
-  },
-  switchBtnActive: {
-    background: "#2563eb",
-    color: "#fff",
-    border: "1px solid #2563eb",
-  },
-  smallBtn: {
-    width: 44,
-    height: 40,
-    borderRadius: 12,
-    border: "1px solid #bfdbfe",
-    background: "#fff",
-    color: "#1e40af",
-    fontWeight: 900,
-    cursor: "pointer",
-  },
-  smallBtnActive: {
-    background: "#2563eb",
-    color: "#fff",
-    border: "1px solid #2563eb",
-  },
-
-  footer: { background: "#1e3a8a", color: "#fff", padding: "22px 18px" },
-  footerInner: { maxWidth: 1100, margin: "0 auto", textAlign: "center" },
-  footerLink: { color: "#dbeafe", textDecoration: "underline" },
-};
-
-const ui = {
   card: {
-    background: "#fff",
-    border: "1px solid #dbeafe",
-    borderRadius: 16,
     padding: 14,
-    boxShadow: "0 10px 30px rgba(30, 64, 175, 0.08)",
+    borderRadius: 16,
+    border: "1px solid rgba(15,43,90,0.12)",
+    background: "linear-gradient(180deg, #f6fbff 0%, #ffffff 100%)",
   },
-  cardTop: {
+  cardTitle: { margin: 0, fontWeight: 900, color: "#0b1b3a" },
+  cardText: { margin: "8px 0 0", color: "rgba(11,27,58,0.75)", fontSize: 14, lineHeight: 1.45 },
+
+  split: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginTop: 14 },
+
+  sliderWrap: {
+    marginTop: 12,
+    padding: 12,
+    borderRadius: 16,
+    border: "1px solid rgba(15,43,90,0.12)",
+    background: "linear-gradient(180deg, #f6fbff 0%, #ffffff 100%)",
+  },
+  sliderRow: {
     display: "flex",
-    justifyContent: "space-between",
+    overflowX: "auto",
     gap: 12,
-    alignItems: "baseline",
-    marginBottom: 10,
+    paddingBottom: 6,
+    scrollSnapType: "x mandatory",
   },
-  cardTitle: { fontWeight: 950, color: "#0f172a" },
-  cardHint: { fontSize: 12, color: "#64748b", fontWeight: 700 },
-  compareFrame: {
-    position: "relative",
-    width: "100%",
-    height: 380,
+  slide: {
+    width: 320,
+    height: 210,
     borderRadius: 14,
-    overflow: "hidden",
-    border: "1px solid #dbeafe",
-    background: "#dbeafe",
+    objectFit: "cover",
+    flexShrink: 0,
+    border: "1px solid rgba(15,43,90,0.16)",
+    boxShadow: "0 10px 22px rgba(10, 30, 70, 0.10)",
+    scrollSnapAlign: "start",
+    background: "#e8f2ff",
   },
-  afterClip: { position: "absolute", inset: 0 },
-  divider: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    width: 3,
-    transform: "translateX(-50%)",
-    background: "rgba(255,255,255,0.95)",
-    boxShadow: "0 0 0 1px rgba(15,23,42,0.10)",
-  },
-  knob: {
-    position: "absolute",
-    top: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 44,
-    height: 44,
-    borderRadius: 999,
-    background: "rgba(255,255,255,0.95)",
+  sliderHint: { margin: "10px 0 0", fontSize: 13, color: "rgba(11,27,58,0.65)" },
+
+  reviews: {
     display: "grid",
-    placeItems: "center",
-    fontWeight: 950,
-    color: "#1e40af",
-    border: "1px solid rgba(15,23,42,0.10)",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
+    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+    gap: 12,
+    marginTop: 14,
   },
-  badge: {
-    position: "absolute",
-    top: 12,
-    padding: "6px 10px",
-    borderRadius: 999,
-    background: "rgba(0,0,0,0.55)",
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: 800,
+  review: {
+    padding: 14,
+    borderRadius: 16,
+    border: "1px solid rgba(15,43,90,0.12)",
+    background: "#ffffff",
   },
-  range: { width: "100%", marginTop: 12 },
+  starRow: { letterSpacing: 2, color: "#0f2b5a", fontWeight: 900, marginBottom: 8 },
+  reviewText: { margin: 0, color: "rgba(11,27,58,0.78)", lineHeight: 1.45 },
+  reviewName: { margin: "10px 0 0", fontWeight: 900, color: "#0b1b3a" },
+
+  footer: { marginTop: 24, textAlign: "center", color: "rgba(11,27,58,0.65)", fontSize: 13 },
+
+  // responsive
+  responsive: `
+    @media (max-width: 900px) {
+      .heroGrid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 1fr; }
+      .reviews { grid-template-columns: 1fr; }
+    }
+  `,
 };
+
+const ImageSlider = ({ images }) => {
+  return (
+    <div style={styles.sliderWrap}>
+      <div style={styles.sliderRow}>
+        {images.map((src, i) => (
+          <img key={i} src={src} alt="Project photo" style={styles.slide} />
+        ))}
+      </div>
+      <p style={styles.sliderHint}>Swipe/scroll to view all photos.</p>
+    </div>
+  );
+};
+
+export default function Page() {
+  // ✅ Put your JPEGs in: /public/images/
+  // ✅ Use EXACT filenames here (case-sensitive)
+  const flooringImages = [
+    "/images/flooring-after-1.jpg",
+    "/images/flooring-after-2.jpg",
+    "/images/flooring-before-1.jpg",
+    "/images/flooring-before-2.jpg",
+  ];
+
+  // Painting gallery: you said keep the after and only one before (adjust names as needed)
+  const paintingImages = [
+    "/images/painting-after-1.jpg",
+    "/images/painting-after-2.jpg",
+    "/images/painting-before-1.jpg",
+  ];
+
+  const services = [
+    "Drywall repair & patches",
+    "Painting (interior/exterior)",
+    "Flooring repairs & installs",
+    "Trim, baseboards & doors",
+    "Light fixture & fan installs",
+    "Minor plumbing fixes",
+    "Fence & gate repairs",
+    "Caulking, sealing & touch-ups",
+    "General home repairs",
+  ];
+
+  return (
+    <div style={styles.page}>
+      <style>{styles.responsive}</style>
+
+      <div style={styles.container}>
+        {/* NAV */}
+        <div style={styles.nav}>
+          <div style={styles.brand}>TC Handyman</div>
+          <div style={styles.navLinks}>
+            <a style={styles.navLink} href="#services">Services</a>
+            <a style={styles.navLink} href="#about">About</a>
+            <a style={styles.navLink} href="#gallery">Work</a>
+            <a style={styles.navLink} href="#reviews">Reviews</a>
+            <a style={styles.navLink} href="#contact">Contact</a>
+          </div>
+        </div>
+
+        {/* HERO */}
+        <section style={styles.hero}>
+          <div className="heroGrid" style={styles.heroGrid}>
+            <div>
+              <h1 style={styles.heroTitle}>Reliable handyman work in Tooele County</h1>
+              <p style={styles.heroText}>
+                Repairs, upgrades, and clean finishes — done right the first time.
+              </p>
+
+              <div style={styles.pillRow}>
+                <span style={styles.pill}>Fast response</span>
+                <span style={styles.pill}>Quality work</span>
+                <span style={styles.pill}>Fair pricing</span>
+                <span style={styles.pill}>Before/After photos</span>
+              </div>
+
+              <div style={styles.buttonRow}>
+                <a style={styles.primaryBtn} href="#contact">Get a Free Quote</a>
+                <a style={styles.ghostBtn} href="#gallery">See My Work</a>
+              </div>
+            </div>
+
+            <div style={styles.heroCard}>
+              <div style={{ fontWeight: 900, fontSize: 16 }}>Quick Contact</div>
+              <div style={{ color: "rgba(255,255,255,0.9)", fontSize: 14, lineHeight: 1.45 }}>
+                Text Michael for a free quote.
+                <br />
+                Include: your address, requested date/time, what you need done, and pictures.
+              </div>
+              <a
+                style={styles.primaryBtn}
+                href="sms:9285774808?&body=Hello%20Michael%2C%20my%20name%20is%20______.%20I%20would%20like%20you%20to%20come%20______(date%2Ftime).%20I%20need%20______(work%20needs%20done).%20(send%20pictures)"
+              >
+                Text Now
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* SERVICES */}
+        <section id="services" style={styles.section}>
+          <h2 style={styles.sectionTitle}>Services</h2>
+          <p style={styles.sectionSub}>Here are some of the jobs I can help you with.</p>
+
+          <div className="cards" style={styles.cards}>
+            {services.map((s, i) => (
+              <div key={i} style={styles.card}>
+                <h3 style={styles.cardTitle}>{s}</h3>
+                <p style={styles.cardText}>
+                  Need something similar? Send a picture and I’ll tell you what it’ll take.
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ABOUT + WHY */}
+        <section id="about" style={styles.section}>
+          <h2 style={styles.sectionTitle}>About Me</h2>
+          <p style={styles.sectionSub}>
+            Now living in Tooele County, I would love to support your home’s needs or something like that.
+          </p>
+
+          <div className="split" style={styles.split}>
+            <div style={styles.card}>
+              <h3 style={styles.cardTitle}>What you can expect</h3>
+              <p style={styles.cardText}>
+                Clear communication, clean work areas, and results you’ll be happy with.
+                I treat your home like it’s my own.
+              </p>
+            </div>
+            <div style={styles.card}>
+              <h3 style={styles.cardTitle}>Why choose me</h3>
+              <p style={styles.cardText}>
+                I show up, I’m honest about pricing and timelines, and I focus on the details that make work look professional.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* GALLERY */}
+        <section id="gallery" style={styles.section}>
+          <h2 style={styles.sectionTitle}>Before & After</h2>
+          <p style={styles.sectionSub}>Swipe through the photos to see real results.</p>
+
+          <div style={{ marginTop: 14 }}>
+            <h3 style={{ margin: "0 0 6px", color: "#0b1b3a", fontWeight: 900 }}>
+              Flooring Job
+            </h3>
+            <ImageSlider images={flooringImages} />
+          </div>
+
+          <div style={{ marginTop: 18 }}>
+            <h3 style={{ margin: "0 0 6px", color: "#0b1b3a", fontWeight: 900 }}>
+              Painting Job
+            </h3>
+            <ImageSlider images={paintingImages} />
+          </div>
+
+          <p style={{ marginTop: 12, color: "rgba(11,27,58,0.7)", fontSize: 13 }}>
+            If any image doesn’t show, double-check the filename matches exactly and that it’s inside <b>/public/images/</b>.
+          </p>
+        </section>
+
+        {/* REVIEWS (no “sample” wording) */}
+        <section id="reviews" style={styles.section}>
+          <h2 style={styles.sectionTitle}>Reviews</h2>
+          <p style={styles.sectionSub}>Here’s what customers say about the work.</p>
+
+          <div className="reviews" style={styles.reviews}>
+            <div style={styles.review}>
+              <div style={styles.starRow}>★★★★★</div>
+              <p style={styles.reviewText}>
+                Showed up on time, communicated clearly, and the finished work looked great.
+              </p>
+              <p style={styles.reviewName}>— Jason R.</p>
+            </div>
+
+            <div style={styles.review}>
+              <div style={styles.starRow}>★★★★★</div>
+              <p style={styles.reviewText}>
+                Fast, clean, and professional. I’ll be calling again for the next project.
+              </p>
+              <p style={styles.reviewName}>— Amanda K.</p>
+            </div>
+
+            <div style={styles.review}>
+              <div style={styles.starRow}>★★★★★</div>
+              <p style={styles.reviewText}>
+                Fair pricing and quality work. Everything was done exactly how we wanted.
+              </p>
+              <p style={styles.reviewName}>— Brian S.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" style={styles.section}>
+          <h2 style={styles.sectionTitle}>Contact</h2>
+          <p style={styles.sectionSub}>
+            For the fastest quote, text Michael and include pictures.
+          </p>
+
+          <div className="split" style={styles.split}>
+            <div style={styles.card}>
+              <h3 style={styles.cardTitle}>Text</h3>
+              <p style={styles.cardText}>
+                <b>928-577-4808</b>
+                <br />
+                Message format:
+                <br />
+                “Hello Michael, my name is _____. I would like you to come _____ (date/time).
+                I need _____ (work needs done). (send pictures)”
+              </p>
+              <a
+                style={{ ...styles.primaryBtn, marginTop: 10 }}
+                href="sms:9285774808?&body=Hello%20Michael%2C%20my%20name%20is%20______.%20I%20would%20like%20you%20to%20come%20______(date%2Ftime).%20I%20need%20______(work%20needs%20done).%20(send%20pictures)"
+              >
+                Tap to Text
+              </a>
+            </div>
+
+            <div style={styles.card}>
+              <h3 style={styles.cardTitle}>Hours</h3>
+              <p style={styles.cardText}>
+                Mon–Sat: 8am–6pm
+                <br />
+                Sun: By request
+                <br /><br />
+                Tooele County & surrounding areas.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <div style={styles.footer}>
+          © {new Date().getFullYear()} TC Handyman. All rights reserved.
+        </div>
+      </div>
+    </div>
+  );
+}
