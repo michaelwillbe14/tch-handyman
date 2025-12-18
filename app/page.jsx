@@ -1,4 +1,3 @@
-// app/page.jsx
 "use client";
 
 const styles = {
@@ -34,6 +33,7 @@ const styles = {
     padding: "8px 10px",
     borderRadius: 12,
   },
+
   hero: {
     marginTop: 18,
     padding: "26px 18px",
@@ -156,29 +156,57 @@ const styles = {
     border: "1px solid rgba(15,43,90,0.12)",
     background: "#ffffff",
   },
-  starRow: { letterSpacing: 2, color: "#0f2b5a", fontWeight: 900, marginBottom: 8 },
+  starsRow: { display: "flex", alignItems: "center", gap: 6, marginBottom: 8 },
+  starsText: { fontSize: 13, fontWeight: 800, color: "rgba(11,27,58,0.75)" },
   reviewText: { margin: 0, color: "rgba(11,27,58,0.78)", lineHeight: 1.45 },
   reviewName: { margin: "10px 0 0", fontWeight: 900, color: "#0b1b3a" },
 
   footer: { marginTop: 24, textAlign: "center", color: "rgba(11,27,58,0.65)", fontSize: 13 },
 
   responsive: `
-  /* Tablets */
-  @media (max-width: 900px) {
-    .heroGrid { grid-template-columns: 1fr; }
-    .cards { grid-template-columns: 1fr 1fr; }
-    .split { grid-template-columns: 1fr; }
-    .reviews { grid-template-columns: 1fr 1fr; }
-  }
+    /* Tablets */
+    @media (max-width: 900px) {
+      .heroGrid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr 1fr; }
+      .split { grid-template-columns: 1fr; }
+      .reviews { grid-template-columns: 1fr 1fr; }
+    }
 
-  /* Phones */
-  @media (max-width: 600px) {
-    .cards { grid-template-columns: 1fr; }
-    .reviews { grid-template-columns: 1fr; }
-  }
-`,
-
+    /* Phones */
+    @media (max-width: 600px) {
+      .cards { grid-template-columns: 1fr; }
+      .reviews { grid-template-columns: 1fr; }
+    }
+  `,
 };
+
+function Star({ filled = true }) {
+  // Google-style: solid star when filled, light gray when not
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      style={{ flexShrink: 0 }}
+    >
+      <path
+        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+        fill={filled ? "#fbbc04" : "#d9d9d9"}
+      />
+    </svg>
+  );
+}
+
+function StarRating({ rating = 5 }) {
+  const stars = [1, 2, 3, 4, 5].map((n) => <Star key={n} filled={n <= rating} />);
+  return (
+    <div style={styles.starsRow}>
+      {stars}
+      <span style={styles.starsText}>{rating}.0</span>
+    </div>
+  );
+}
 
 const ImageSlider = ({ images }) => {
   return (
@@ -203,7 +231,6 @@ export default function Page() {
     "/images/flooring-before-2.jpg",
   ];
 
-  // Painting gallery: you said keep the after and only one before (adjust names as needed)
   const paintingImages = [
     "/images/painting-after-1.jpg",
     "/images/painting-after-2.jpg",
@@ -270,7 +297,7 @@ export default function Page() {
               </div>
               <a
                 style={styles.primaryBtn}
-                href="sms:9285774808?&body=Hello%20Michael%2C%20my%20name%20is%20______.%20I%20would%20like%20you%20to%20come%20______(date%2Ftime).%20I%20need%20______(work%20needs%20done).%20(send%20pictures)"
+                href="sms:9285774808?&body=Hello%20Michael%2C%20my%20name%20is%20______.%20I%20would%20like%20you%20to%20come________(date%2Ftime).%20I%20need%20__________(work%20needs%20done).%20(send%20pictures)"
               >
                 Text Now
               </a>
@@ -344,69 +371,66 @@ export default function Page() {
         </section>
 
         {/* REVIEWS */}
-<section id="reviews" style={styles.section}>
-  <h2 style={styles.sectionTitle}>Reviews</h2>
-  <p style={styles.sectionSub}>
-    Here’s what customers say about the work.
-  </p>
+        <section id="reviews" style={styles.section}>
+          <h2 style={styles.sectionTitle}>Reviews</h2>
+          <p style={styles.sectionSub}>Here’s what customers say about the work.</p>
 
-  <div className="reviews" style={styles.reviews}>
-    <div style={styles.review}>
-      <div style={styles.starRow}>★★★★★</div>
-      <p style={styles.reviewText}>
-        Michael knocked out a punch-list at our place in Tooele and everything came out clean and solid.
-        Great communication and showed up on time.
-      </p>
-      <p style={styles.reviewName}>— Jason R., Tooele</p>
-    </div>
+          <div className="reviews" style={styles.reviews}>
+            <div style={styles.review}>
+              <StarRating rating={5} />
+              <p style={styles.reviewText}>
+                Michael knocked out a punch-list at our place in Tooele and everything came out clean and solid.
+                Great communication and showed up on time.
+              </p>
+              <p style={styles.reviewName}>— Jason R., Tooele</p>
+            </div>
 
-    <div style={styles.review}>
-      <div style={styles.starRow}>★★★★★</div>
-      <p style={styles.reviewText}>
-        We needed painting touch-ups before family came into town in Stansbury Park.
-        He was fast, professional, and the walls look brand new.
-      </p>
-      <p style={styles.reviewName}>— Amanda K., Stansbury Park</p>
-    </div>
+            <div style={styles.review}>
+              <StarRating rating={5} />
+              <p style={styles.reviewText}>
+                We needed painting touch-ups before family came into town in Stansbury Park.
+                He was fast, professional, and the walls look brand new.
+              </p>
+              <p style={styles.reviewName}>— Amanda K., Stansbury Park</p>
+            </div>
 
-    <div style={styles.review}>
-      <div style={styles.starRow}>★★★★★</div>
-      <p style={styles.reviewText}>
-        Had a few repairs around the house in Lake Point and he handled all of it in one visit.
-        Fair pricing and quality work.
-      </p>
-      <p style={styles.reviewName}>— Brian S., Lake Point</p>
-    </div>
+            <div style={styles.review}>
+              <StarRating rating={5} />
+              <p style={styles.reviewText}>
+                Had a few repairs around the house in Lake Point and he handled all of it in one visit.
+                Fair pricing and quality work.
+              </p>
+              <p style={styles.reviewName}>— Brian S., Lake Point</p>
+            </div>
 
-    <div style={styles.review}>
-      <div style={styles.starRow}>★★★★★</div>
-      <p style={styles.reviewText}>
-        Flooring repair in Erda turned out awesome — you can’t even tell where the old damage was.
-        Clean work area and respectful the whole time.
-      </p>
-      <p style={styles.reviewName}>— Megan T., Erda</p>
-    </div>
+            <div style={styles.review}>
+              <StarRating rating={5} />
+              <p style={styles.reviewText}>
+                Flooring repair in Erda turned out awesome — you can’t even tell where the old damage was.
+                Clean work area and respectful the whole time.
+              </p>
+              <p style={styles.reviewName}>— Megan T., Erda</p>
+            </div>
 
-    <div style={styles.review}>
-      <div style={styles.starRow}>★★★★★</div>
-      <p style={styles.reviewText}>
-        Quick turnaround for a small drywall patch in Grantsville.
-        Matched the texture really well and the paint blend looks perfect.
-      </p>
-      <p style={styles.reviewName}>— Chris P., Grantsville</p>
-    </div>
+            <div style={styles.review}>
+              <StarRating rating={5} />
+              <p style={styles.reviewText}>
+                Quick turnaround for a small drywall patch in Grantsville.
+                Matched the texture really well and the paint blend looks perfect.
+              </p>
+              <p style={styles.reviewName}>— Chris P., Grantsville</p>
+            </div>
 
-    <div style={styles.review}>
-      <div style={styles.starRow}>★★★★★</div>
-      <p style={styles.reviewText}>
-        He installed a couple fixtures and fixed a door that wouldn’t close right in Stockton.
-        Everything works great now — super helpful and easy to work with.
-      </p>
-      <p style={styles.reviewName}>— Haley M., Stockton</p>
-    </div>
-  </div>
-</section>
-
+            <div style={styles.review}>
+              <StarRating rating={5} />
+              <p style={styles.reviewText}>
+                He installed a couple fixtures and fixed a door that wouldn’t close right in Stockton.
+                Everything works great now — super helpful and easy to work with.
+              </p>
+              <p style={styles.reviewName}>— Haley M., Stockton</p>
+            </div>
+          </div>
+        </section>
 
         {/* CONTACT */}
         <section id="contact" style={styles.section}>
@@ -428,7 +452,7 @@ export default function Page() {
               </p>
               <a
                 style={{ ...styles.primaryBtn, marginTop: 10 }}
-                href="sms:9285774808?&body=Hello%20Michael%2C%20my%20name%20is%20______.%20I%20would%20like%20you%20to%20come%20______(date%2Ftime).%20I%20need%20______(work%20needs%20done).%20(send%20pictures)"
+                href="sms:9285774808?&body=Hello%20Michael%2C%20my%20name%20is%20______.%20I%20would%20like%20you%20to%20come________(date%2Ftime).%20I%20need%20__________(work%20needs%20done).%20(send%20pictures)"
               >
                 Tap to Text
               </a>
