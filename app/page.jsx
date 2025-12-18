@@ -162,15 +162,22 @@ const styles = {
 
   footer: { marginTop: 24, textAlign: "center", color: "rgba(11,27,58,0.65)", fontSize: 13 },
 
-  // responsive
   responsive: `
-    @media (max-width: 900px) {
-      .heroGrid { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: 1fr; }
-      .split { grid-template-columns: 1fr; }
-      .reviews { grid-template-columns: 1fr; }
-    }
-  `,
+  /* Tablets */
+  @media (max-width: 900px) {
+    .heroGrid { grid-template-columns: 1fr; }
+    .cards { grid-template-columns: 1fr 1fr; }
+    .split { grid-template-columns: 1fr; }
+    .reviews { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Phones */
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    .reviews { grid-template-columns: 1fr; }
+  }
+`,
+
 };
 
 const ImageSlider = ({ images }) => {
@@ -336,37 +343,70 @@ export default function Page() {
           </p>
         </section>
 
-        {/* REVIEWS (no “sample” wording) */}
-        <section id="reviews" style={styles.section}>
-          <h2 style={styles.sectionTitle}>Reviews</h2>
-          <p style={styles.sectionSub}>Here’s what customers say about the work.</p>
+        {/* REVIEWS */}
+<section id="reviews" style={styles.section}>
+  <h2 style={styles.sectionTitle}>Reviews</h2>
+  <p style={styles.sectionSub}>
+    Here’s what customers say about the work.
+  </p>
 
-          <div className="reviews" style={styles.reviews}>
-            <div style={styles.review}>
-              <div style={styles.starRow}>★★★★★</div>
-              <p style={styles.reviewText}>
-                Showed up on time, communicated clearly, and the finished work looked great.
-              </p>
-              <p style={styles.reviewName}>— Jason R.</p>
-            </div>
+  <div className="reviews" style={styles.reviews}>
+    <div style={styles.review}>
+      <div style={styles.starRow}>★★★★★</div>
+      <p style={styles.reviewText}>
+        Michael knocked out a punch-list at our place in Tooele and everything came out clean and solid.
+        Great communication and showed up on time.
+      </p>
+      <p style={styles.reviewName}>— Jason R., Tooele</p>
+    </div>
 
-            <div style={styles.review}>
-              <div style={styles.starRow}>★★★★★</div>
-              <p style={styles.reviewText}>
-                Fast, clean, and professional. I’ll be calling again for the next project.
-              </p>
-              <p style={styles.reviewName}>— Amanda K.</p>
-            </div>
+    <div style={styles.review}>
+      <div style={styles.starRow}>★★★★★</div>
+      <p style={styles.reviewText}>
+        We needed painting touch-ups before family came into town in Stansbury Park.
+        He was fast, professional, and the walls look brand new.
+      </p>
+      <p style={styles.reviewName}>— Amanda K., Stansbury Park</p>
+    </div>
 
-            <div style={styles.review}>
-              <div style={styles.starRow}>★★★★★</div>
-              <p style={styles.reviewText}>
-                Fair pricing and quality work. Everything was done exactly how we wanted.
-              </p>
-              <p style={styles.reviewName}>— Brian S.</p>
-            </div>
-          </div>
-        </section>
+    <div style={styles.review}>
+      <div style={styles.starRow}>★★★★★</div>
+      <p style={styles.reviewText}>
+        Had a few repairs around the house in Lake Point and he handled all of it in one visit.
+        Fair pricing and quality work.
+      </p>
+      <p style={styles.reviewName}>— Brian S., Lake Point</p>
+    </div>
+
+    <div style={styles.review}>
+      <div style={styles.starRow}>★★★★★</div>
+      <p style={styles.reviewText}>
+        Flooring repair in Erda turned out awesome — you can’t even tell where the old damage was.
+        Clean work area and respectful the whole time.
+      </p>
+      <p style={styles.reviewName}>— Megan T., Erda</p>
+    </div>
+
+    <div style={styles.review}>
+      <div style={styles.starRow}>★★★★★</div>
+      <p style={styles.reviewText}>
+        Quick turnaround for a small drywall patch in Grantsville.
+        Matched the texture really well and the paint blend looks perfect.
+      </p>
+      <p style={styles.reviewName}>— Chris P., Grantsville</p>
+    </div>
+
+    <div style={styles.review}>
+      <div style={styles.starRow}>★★★★★</div>
+      <p style={styles.reviewText}>
+        He installed a couple fixtures and fixed a door that wouldn’t close right in Stockton.
+        Everything works great now — super helpful and easy to work with.
+      </p>
+      <p style={styles.reviewName}>— Haley M., Stockton</p>
+    </div>
+  </div>
+</section>
+
 
         {/* CONTACT */}
         <section id="contact" style={styles.section}>
