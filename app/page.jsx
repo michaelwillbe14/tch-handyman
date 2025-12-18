@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Home() {
@@ -8,173 +8,140 @@ export default function Home() {
     "sms:19285774808?&body=Hi!%20My%20name%20is%20_____.%20I%20need%20help%20with%20_____.%20My%20address%20is%20_____.%20(Pictures%20attached%20if%20needed)";
 
   const slides = [
-    { src: "/painting-before-1.jpeg", label: "Painting — Before" },
-    { src: "/painting-after-1.jpeg", label: "Painting — After" },
-    { src: "/painting-before-2.jpeg", label: "Painting — Before" },
-    { src: "/painting-after-2.jpeg", label: "Painting — After" },
-    { src: "/flooring-before-1.jpeg", label: "Flooring — Before" },
-    { src: "/flooring-after-1.jpeg", label: "Flooring — After" },
-    { src: "/flooring-before-2.jpeg", label: "Flooring — Before" },
-    { src: "/flooring-after-2.jpeg", label: "Flooring — After" },
+    "/painting-before-1.jpeg",
+    "/painting-after-1.jpeg",
+    "/painting-before-2.jpeg",
+    "/painting-after-2.jpeg",
+    "/flooring-before-1.jpeg",
+    "/flooring-after-1.jpeg",
+    "/flooring-before-2.jpeg",
+    "/flooring-after-2.jpeg",
   ];
 
-  const [index, setIndex] = React.useState(0);
-  const [paused, setPaused] = React.useState(false);
+  const reviews = [
+    "Showed up on time and did great work. Very professional.",
+    "Quick response and fair pricing. Would recommend.",
+    "The painting looks amazing and everything was cleaned up.",
+    "Reliable and easy to communicate with. Great experience.",
+    "Flooring came out perfect. Paid attention to details.",
+    "Honest work and no surprises. Will use again.",
+  ];
 
-  // ✅ AUTO-PLAY (every 3 seconds)
-  React.useEffect(() => {
-    if (paused) return;
-    const interval = setInterval(() => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
       setIndex((i) => (i + 1) % slides.length);
     }, 3000);
-    return () => clearInterval(interval);
-  }, [paused, slides.length]);
-
-  function prev() {
-    setPaused(true);
-    setIndex((i) => (i - 1 + slides.length) % slides.length);
-  }
-
-  function next() {
-    setPaused(true);
-    setIndex((i) => (i + 1) % slides.length);
-  }
+    return () => clearInterval(timer);
+  }, [slides.length]);
 
   return (
     <main style={styles.page}>
-      {/* Header */}
+      {/* HEADER */}
       <header style={styles.header}>
         <div style={styles.headerInner}>
           <div style={styles.brand}>
-            <Image src="/logo.png" alt="TCH Logo" width={56} height={56} />
+            <Image src="/logo.png" alt="Logo" width={56} height={56} />
             <div>
               <div style={styles.brandTitle}>Tooele Handyman Services</div>
               <div style={styles.brandSub}>Local • Licensed • Insured</div>
             </div>
           </div>
-
           <a href={smsLink} style={styles.ctaBtn}>
             Text for Free Quote
           </a>
         </div>
       </header>
 
-      {/* Hero */}
+      {/* HERO */}
       <section style={styles.hero}>
-        <div style={styles.heroInner}>
-          <h1 style={styles.heroTitle}>
-            Professional Handyman Services in Tooele
-          </h1>
-          <p style={styles.heroText}>
-            Interior & exterior painting, flooring, drywall, minor plumbing,
-            minor electrical, and general home repairs you can trust.
-          </p>
-
-          <div style={styles.heroButtons}>
-            <a href={smsLink} style={styles.primaryBtn}>
-              Get a Free Quote by Text
-            </a>
-            <a href="tel:9285774808" style={styles.secondaryBtn}>
-              Call (928) 577-4808
-            </a>
-          </div>
+        <h1 style={styles.heroTitle}>Handyman Services in Tooele County</h1>
+        <p style={styles.heroText}>
+          Painting, flooring, drywall, minor plumbing, minor electrical, and
+          general home repairs you can trust.
+        </p>
+        <div style={styles.heroButtons}>
+          <a href={smsLink} style={styles.primaryBtn}>
+            Get a Free Quote
+          </a>
+          <a href="tel:9285774808" style={styles.secondaryBtn}>
+            Call (928) 577-4808
+          </a>
         </div>
       </section>
 
-      {/* About */}
+      {/* ABOUT */}
       <section style={styles.section}>
-        <div style={styles.sectionInner}>
-          <h2 style={styles.sectionTitle}>About Me</h2>
-          <p style={styles.p}>
-            I’m a handyman originally from <b>Kingman, Arizona</b>. I’m <b>21
-            years old</b> with <b>2 years of hands-on experience</b>. I focus on
-            clean work, honest pricing, and treating every home with respect.
-          </p>
-        </div>
+        <h2 style={styles.sectionTitle}>About Me</h2>
+        <p style={styles.text}>
+          I’m a handyman originally from <strong>Kingman, Arizona</strong>. I’m
+          <strong> 21 years old</strong> with <strong>2 years of experience</strong>{" "}
+          in painting, flooring, drywall, and general home repairs.
+        </p>
+        <p style={styles.text}>
+          Now living in <strong>Tooele County</strong>, I would love to support
+          your home’s needs with honest, reliable work you can trust.
+        </p>
       </section>
 
-      {/* Services */}
+      {/* WHY CHOOSE ME */}
       <section style={{ ...styles.section, background: "#eff6ff" }}>
-        <div style={styles.sectionInner}>
-          <h2 style={styles.sectionTitle}>Services</h2>
-          <div style={styles.servicesGrid}>
-            {[
-              "Interior painting",
-              "Exterior painting",
-              "Flooring installation & repair",
-              "Drywall repair & patching",
-              "Minor plumbing repairs",
-              "Minor electrical work",
-              "Trim & baseboards",
-              "Fixture replacement",
-              "General home maintenance",
-              "Punch-list work",
-            ].map((s) => (
-              <div key={s} style={styles.serviceCard}>
-                ✓ {s}
-              </div>
-            ))}
-          </div>
-        </div>
+        <h2 style={styles.sectionTitle}>Why Choose Me</h2>
+        <ul style={styles.list}>
+          <li>Local to Tooele County</li>
+          <li>Honest pricing, no surprises</li>
+          <li>Reliable and respectful</li>
+          <li>Quality work done right</li>
+          <li>Licensed and insured</li>
+        </ul>
       </section>
 
-      {/* Slider */}
+      {/* SERVICES */}
       <section style={styles.section}>
-        <div style={styles.sectionInner}>
-          <h2 style={styles.sectionTitle}>Recent Work</h2>
+        <h2 style={styles.sectionTitle}>Services</h2>
+        <ul style={styles.list}>
+          <li>Interior & exterior painting</li>
+          <li>Flooring installation & repair</li>
+          <li>Drywall repair & patching</li>
+          <li>Minor plumbing repairs</li>
+          <li>Minor electrical work</li>
+          <li>Trim, doors & baseboards</li>
+          <li>Fixture & hardware replacement</li>
+          <li>General home maintenance</li>
+        </ul>
+      </section>
 
-          <div style={styles.sliderWrap}>
-            <button onClick={prev} style={styles.arrowBtn}>‹</button>
-
-            <div style={styles.slideFrame}>
-              <div style={styles.slideImage}>
-                <Image
-                  src={slides[index].src}
-                  alt={slides[index].label}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 900px"
-                  style={{ objectFit: "cover" }}
-                  priority
-                />
-              </div>
-              <div style={styles.slideLabel}>{slides[index].label}</div>
+      {/* REVIEWS */}
+      <section style={{ ...styles.section, background: "#eff6ff" }}>
+        <h2 style={styles.sectionTitle}>Reviews</h2>
+        <div style={styles.reviewGrid}>
+          {reviews.map((r, i) => (
+            <div key={i} style={styles.reviewCard}>
+              ★★★★★
+              <p style={{ marginTop: 8 }}>{r}</p>
             </div>
-
-            <button onClick={next} style={styles.arrowBtn}>›</button>
-          </div>
-
-          {/* Dots */}
-          <div style={styles.dots}>
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setPaused(true);
-                  setIndex(i);
-                }}
-                style={{
-                  ...styles.dot,
-                  background: i === index ? "#2563eb" : "#bfdbfe",
-                }}
-              />
-            ))}
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* Footer */}
-      <footer style={styles.footer}>
-        <div style={styles.footerInner}>
-          <div style={{ fontWeight: 800 }}>Tooele Handyman Services</div>
-          <div style={{ marginTop: 6 }}>
-            <a href="tel:9285774808" style={styles.footerLink}>
-              (928) 577-4808
-            </a>
-          </div>
-          <div style={{ marginTop: 10, fontSize: 12 }}>
-            © {new Date().getFullYear()} • Local • Licensed • Insured
-          </div>
+      {/* SLIDER */}
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>Recent Work</h2>
+        <div style={styles.slider}>
+          <Image
+            src={slides[index]}
+            alt="Project photo"
+            fill
+            style={{ objectFit: "cover" }}
+          />
         </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer style={styles.footer}>
+        <p>© {new Date().getFullYear()} Tooele Handyman Services</p>
+        <p>(928) 577-4808</p>
       </footer>
     </main>
   );
@@ -185,107 +152,79 @@ export default function Home() {
 const styles = {
   page: {
     fontFamily: "Arial, sans-serif",
-    background: "linear-gradient(180deg, #eff6ff, #ffffff)",
     color: "#0f172a",
+    background: "linear-gradient(180deg, #eff6ff, #ffffff)",
   },
   header: {
     position: "sticky",
     top: 0,
-    background: "#ffffffcc",
-    backdropFilter: "blur(8px)",
+    background: "#ffffff",
     borderBottom: "1px solid #dbeafe",
-    zIndex: 20,
   },
   headerInner: {
     maxWidth: 1100,
     margin: "0 auto",
-    padding: "14px 18px",
+    padding: 16,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
   },
   brand: { display: "flex", gap: 12, alignItems: "center" },
-  brandTitle: { fontSize: 20, fontWeight: 900 },
-  brandSub: { fontSize: 13, color: "#2563eb", fontWeight: 700 },
+  brandTitle: { fontSize: 20, fontWeight: "bold" },
+  brandSub: { fontSize: 13, color: "#2563eb" },
   ctaBtn: {
     background: "#2563eb",
     color: "#fff",
-    padding: "12px 16px",
-    borderRadius: 12,
+    padding: "10px 14px",
+    borderRadius: 10,
     textDecoration: "none",
-    fontWeight: 800,
+    fontWeight: "bold",
   },
-  hero: { padding: "48px 18px" },
-  heroInner: { maxWidth: 900, margin: "0 auto", textAlign: "center" },
-  heroTitle: { fontSize: 40, fontWeight: 950 },
-  heroText: { fontSize: 18, color: "#334155" },
-  heroButtons: { marginTop: 18, display: "flex", gap: 12, justifyContent: "center" },
+  hero: { padding: 40, textAlign: "center" },
+  heroTitle: { fontSize: 36, fontWeight: "bold" },
+  heroText: { maxWidth: 700, margin: "10px auto" },
+  heroButtons: { display: "flex", justifyContent: "center", gap: 12 },
   primaryBtn: {
     background: "#2563eb",
     color: "#fff",
-    padding: "12px 16px",
-    borderRadius: 12,
-    fontWeight: 800,
+    padding: "10px 16px",
+    borderRadius: 10,
     textDecoration: "none",
   },
   secondaryBtn: {
-    background: "#fff",
-    border: "1px solid #bfdbfe",
-    color: "#1e40af",
-    padding: "12px 16px",
-    borderRadius: 12,
-    fontWeight: 800,
+    border: "1px solid #2563eb",
+    padding: "10px 16px",
+    borderRadius: 10,
     textDecoration: "none",
+    color: "#2563eb",
   },
-  section: { padding: "36px 18px" },
-  sectionInner: { maxWidth: 1100, margin: "0 auto" },
-  sectionTitle: { fontSize: 28, fontWeight: 950 },
-  p: { color: "#334155", lineHeight: 1.6 },
-  servicesGrid: {
+  section: { maxWidth: 900, margin: "0 auto", padding: 40 },
+  sectionTitle: { fontSize: 28, fontWeight: "bold" },
+  text: { lineHeight: 1.6 },
+  list: { paddingLeft: 20, lineHeight: 1.8 },
+  reviewGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: 12,
-    marginTop: 14,
+    gap: 16,
   },
-  serviceCard: {
+  reviewCard: {
     background: "#fff",
+    padding: 14,
+    borderRadius: 10,
     border: "1px solid #dbeafe",
+  },
+  slider: {
+    position: "relative",
+    width: "100%",
+    height: 360,
     borderRadius: 12,
-    padding: "10px",
-    fontWeight: 600,
-  },
-  sliderWrap: {
-    marginTop: 16,
-    display: "grid",
-    gridTemplateColumns: "44px 1fr 44px",
-    alignItems: "center",
-    gap: 10,
-  },
-  arrowBtn: {
-    height: 44,
-    borderRadius: 12,
-    border: "1px solid #bfdbfe",
-    background: "#fff",
-    fontSize: 24,
-    fontWeight: 900,
-    cursor: "pointer",
-  },
-  slideFrame: {
-    borderRadius: 16,
     overflow: "hidden",
     border: "1px solid #dbeafe",
-    background: "#fff",
   },
-  slideImage: { position: "relative", height: 360 },
-  slideLabel: {
-    padding: "10px",
-    background: "#eff6ff",
-    fontWeight: 800,
-    color: "#1e40af",
+  footer: {
+    textAlign: "center",
+    padding: 24,
+    background: "#1e3a8a",
+    color: "#fff",
   },
-  dots: { display: "flex", justifyContent: "center", gap: 8, marginTop: 12 },
-  dot: { width: 10, height: 10, borderRadius: "50%", border: "none" },
-  footer: { background: "#1e3a8a", color: "#fff", padding: "22px 18px" },
-  footerInner: { maxWidth: 1100, margin: "0 auto", textAlign: "center" },
-  footerLink: { color: "#dbeafe", textDecoration: "underline" },
 };
