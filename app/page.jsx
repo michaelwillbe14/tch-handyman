@@ -15,7 +15,7 @@ export default function Home() {
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <img
             src="/logo.png"
-            alt="TCH Logo"
+            alt="TCH Handyman Logo"
             style={{ width: 60, height: 60, objectFit: "contain" }}
           />
           <div>
@@ -35,26 +35,29 @@ export default function Home() {
             borderRadius: 10,
             textDecoration: "none",
             fontWeight: 700,
-            whiteSpace: "nowrap",
           }}
         >
-          Text for a Free Quote
+          Text for Free Quote
         </a>
       </header>
 
-      {/* Hero */}
-      <section style={{ padding: "40px 20px", textAlign: "center" }}>
-        <h2 style={{ marginTop: 0 }}>Handyman Services in Tooele & Surrounding Areas</h2>
-        <p style={{ maxWidth: 700, margin: "10px auto 0", color: "#555" }}>
-          Painting (interior/exterior), flooring, drywall work, minor plumbing,
-          minor electrical, and general home repairs.
+      {/* About Me */}
+      <section style={{ padding: "30px 20px", maxWidth: 900, margin: "0 auto" }}>
+        <h2>About Me</h2>
+        <p style={{ lineHeight: 1.6 }}>
+          I’m a handyman originally from <strong>Kingman, Arizona</strong>. I’m
+          <strong> 21 years old</strong> and have been doing this kind of work for
+          <strong> 2 years</strong>. I take pride in honest work, showing up on
+          time, and treating every home with respect.
         </p>
-        <p style={{ marginTop: 16, fontWeight: 700 }}>
-          📞 (928) 577-4808
+        <p style={{ lineHeight: 1.6 }}>
+          I provide reliable handyman services in Tooele and the surrounding
+          areas. For a free quote, just text me what you need done and your
+          address.
         </p>
       </section>
 
-      {/* About Me */}
+      {/* Services */}
       <section
         style={{
           padding: "30px 20px",
@@ -64,113 +67,57 @@ export default function Home() {
         }}
       >
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
-          <h3 style={{ marginTop: 0 }}>About Me</h3>
-
-          <p style={{ color: "#333", lineHeight: 1.6 }}>
-            I’m a handyman originally from <b>Kingman, Arizona</b>. I’m <b>21 years old</b>,
-            and I’ve been doing this kind of work for <b>2 years</b>. I take pride in doing
-            quality work, showing up on time, and treating every home with respect.
-          </p>
-
-          <p style={{ color: "#333", lineHeight: 1.6, marginBottom: 0 }}>
-            If you need a free quote, just tap the text button above and send me a message
-            with what you need done and your address.
-          </p>
+          <h2>Services I Offer</h2>
+          <ul style={{ lineHeight: 2, paddingLeft: 20 }}>
+            <li>Interior painting</li>
+            <li>Exterior painting</li>
+            <li>Flooring installation & repairs</li>
+            <li>Drywall repair & patching</li>
+            <li>Minor plumbing repairs</li>
+            <li>Minor electrical work</li>
+            <li>Trim, baseboards & door repairs</li>
+            <li>Fixture replacement (lights, faucets, hardware)</li>
+            <li>General home maintenance & repairs</li>
+            <li>Punch-list & small project work</li>
+          </ul>
         </div>
       </section>
 
       {/* Pictures */}
-      <section style={{ padding: "40px 20px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <h3 style={{ marginTop: 0, textAlign: "center" }}>Recent Work</h3>
+      <section style={{ padding: "30px 20px", maxWidth: 1100, margin: "0 auto" }}>
+        <h2 style={{ textAlign: "center" }}>Recent Work</h2>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-              gap: 16,
-              marginTop: 20,
-            }}
-          >
-            {/* Painting */}
-            <figure style={{ margin: 0 }}>
-              <img
-                src="/painting-before-1.jpeg"
-                alt="Painting Before 1"
-                style={{ width: "100%", height: 220, objectFit: "cover", borderRadius: 10 }}
-              />
-              <figcaption style={{ marginTop: 8, color: "#555" }}>Painting – Before 1</figcaption>
-            </figure>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: 16,
+            marginTop: 20,
+          }}
+        >
+          {/* Painting */}
+          <img src="/painting-before-1.jpeg" alt="Painting before 1" style={imgStyle} />
+          <img src="/painting-after-1.jpeg" alt="Painting after 1" style={imgStyle} />
+          <img src="/painting-before-2.jpeg" alt="Painting before 2" style={imgStyle} />
+          <img src="/painting-after-2.jpeg" alt="Painting after 2" style={imgStyle} />
 
-            <figure style={{ margin: 0 }}>
-              <img
-                src="/painting-after-1.jpeg"
-                alt="Painting After 1"
-                style={{ width: "100%", height: 220, objectFit: "cover", borderRadius: 10 }}
-              />
-              <figcaption style={{ marginTop: 8, color: "#555" }}>Painting – After 1</figcaption>
-            </figure>
-
-            <figure style={{ margin: 0 }}>
-              <img
-                src="/painting-before-2.jpeg"
-                alt="Painting Before 2"
-                style={{ width: "100%", height: 220, objectFit: "cover", borderRadius: 10 }}
-              />
-              <figcaption style={{ marginTop: 8, color: "#555" }}>Painting – Before 2</figcaption>
-            </figure>
-
-            <figure style={{ margin: 0 }}>
-              <img
-                src="/painting-after-2.jpeg"
-                alt="Painting After 2"
-                style={{ width: "100%", height: 220, objectFit: "cover", borderRadius: 10 }}
-              />
-              <figcaption style={{ marginTop: 8, color: "#555" }}>Painting – After 2</figcaption>
-            </figure>
-
-            {/* Flooring */}
-            <figure style={{ margin: 0 }}>
-              <img
-                src="/flooring-before-1.jpeg"
-                alt="Flooring Before 1"
-                style={{ width: "100%", height: 220, objectFit: "cover", borderRadius: 10 }}
-              />
-              <figcaption style={{ marginTop: 8, color: "#555" }}>Flooring – Before 1</figcaption>
-            </figure>
-
-            <figure style={{ margin: 0 }}>
-              <img
-                src="/flooring-after-1.jpeg"
-                alt="Flooring After 1"
-                style={{ width: "100%", height: 220, objectFit: "cover", borderRadius: 10 }}
-              />
-              <figcaption style={{ marginTop: 8, color: "#555" }}>Flooring – After 1</figcaption>
-            </figure>
-
-            <figure style={{ margin: 0 }}>
-              <img
-                src="/flooring-before-2.jpeg"
-                alt="Flooring Before 2"
-                style={{ width: "100%", height: 220, objectFit: "cover", borderRadius: 10 }}
-              />
-              <figcaption style={{ marginTop: 8, color: "#555" }}>Flooring – Before 2</figcaption>
-            </figure>
-
-            <figure style={{ margin: 0 }}>
-              <img
-                src="/flooring-after-2.jpeg"
-                alt="Flooring After 2"
-                style={{ width: "100%", height: 220, objectFit: "cover", borderRadius: 10 }}
-              />
-              <figcaption style={{ marginTop: 8, color: "#555" }}>Flooring – After 2</figcaption>
-            </figure>
-          </div>
+          {/* Flooring */}
+          <img src="/flooring-before-1.jpeg" alt="Flooring before 1" style={imgStyle} />
+          <img src="/flooring-after-1.jpeg" alt="Flooring after 1" style={imgStyle} />
+          <img src="/flooring-before-2.jpeg" alt="Flooring before 2" style={imgStyle} />
+          <img src="/flooring-after-2.jpeg" alt="Flooring after 2" style={imgStyle} />
         </div>
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: "20px", textAlign: "center", borderTop: "1px solid #ddd", color: "#666" }}>
+      <footer
+        style={{
+          padding: "20px",
+          textAlign: "center",
+          borderTop: "1px solid #ddd",
+          color: "#666",
+        }}
+      >
         <p style={{ margin: 0 }}>
           © {new Date().getFullYear()} Tooele Handyman Services • (928) 577-4808
         </p>
@@ -178,3 +125,10 @@ export default function Home() {
     </main>
   );
 }
+
+const imgStyle = {
+  width: "100%",
+  height: 220,
+  objectFit: "cover",
+  borderRadius: 10,
+};
